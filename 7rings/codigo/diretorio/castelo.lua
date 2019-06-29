@@ -12,7 +12,7 @@ function castelo_load()
 end
 
 function castelo_update(dt)
-
+	
 end
 
 function castelo_draw()

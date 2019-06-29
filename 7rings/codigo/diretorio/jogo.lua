@@ -12,13 +12,18 @@ function jogo_load()
 end
 
 function jogo_update(dt)
+
 	heroina=heroina_update(dt)
 	inimigo=inimigo_update(dt)
 
 	-- detecta colisão com as extremidades
 	heroina=detectarColisaoDentro(heroina,janela)
 	-- detecta colisão com o inimigo
-	morte=detectarColisao(heroina,inimigo)
+	if not morte then
+		morte=detectarColisao(heroina,inimigo)
+	else 
+		fimDoJogo_update(dt)
+	end
 	-- detecta colisao com o castelo
 	for i=castelo.y, castelo.altura, castelo.alturaBloco do
 		for j=castelo.x, castelo.largura, castelo.larguraBloco do
@@ -37,8 +42,31 @@ function jogo_draw()
 
 	if morte then
 		love.graphics.clear()
-		love.graphics.setFont(fontes.large)
+		fimDoJogo_draw()
+	end	
+end
+
+function fimDoJogo_update(dt)
+	if love.keyboard.isDown('space') then
+		love.graphics.clear()
+		love.load()
+		love.update(dt)
+		love.draw()
+	end
+end
+
+function fimDoJogo_draw()
+	love.graphics.setBackgroundColor(255,255,255)
+
+	-- Desenhando 'FIM DO JOGO'
+	love.graphics.setFont(fontes.grande)
+    love.graphics.setColor(255, 0, 255)
+    love.graphics.printf('FIM DO JOGO', janela.largura/2-500, janela.altura/2-100, 1000, 'center')
+
+    -- reiniciar o jogo
+    if math.cos(2 * math.pi * love.timer.getTime()) > 0 then
+		love.graphics.setFont(fontes.pequena)
         love.graphics.setColor(255, 0, 255)
-        love.graphics.printf('FIM DO JOGO', janela.largura / 2 - 500, janela.altura / 2, 1000, 'center')
+        love.graphics.printf('PRESSIONE ESPAÇO PARA REINICIAR', janela.largura/2-500, janela.altura/2, 1000, 'center')
     end
 end

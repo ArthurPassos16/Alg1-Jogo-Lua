@@ -16,22 +16,6 @@ function detectarColisaoFora(personagem,x2,y2,alt2,larg2)
 	return personagem
 end
 
-function detectarColisaoParede(heroina,obstaculo)
-	if heroina.y<obstaculo.borda then
-		heroina.y=obstaculo.borda
-	end
-	if heroina.x<obstaculo.borda then
-		heroina.x=obstaculo.borda
-	end
-	if heroina.y+heroina.altura>obstaculo.altura-obstaculo.borda then
-		heroina.y=obstaculo.altura-heroina.altura-obstaculo.borda
-	end
-	if heroina.x+heroina.largura>obstaculo.largura-obstaculo.borda then
-		heroina.x=obstaculo.largura-heroina.largura-obstaculo.borda
-	end
-	return heroina
-end
-
 function detectarColisao(heroina,obstaculo)
 	return heroina.x<obstaculo.x+obstaculo.largura and obstaculo.x<heroina.x+heroina.largura and heroina.y<obstaculo.y+obstaculo.altura and obstaculo.y<heroina.y+heroina.altura
 end

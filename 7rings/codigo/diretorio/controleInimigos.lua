@@ -1,6 +1,7 @@
 function inimigos_load()
-	inimigos={}
-    inimigos.ultimoTempoVida=love.timer.getTime() 
+	inimigos={
+        ultimoTempoVida=love.timer.getTime()
+    } 
 	return inimigos
  end
 
@@ -18,7 +19,6 @@ function gerenciador_update(dt)
     -- adiciona um inimigo
     if #inimigos < 6 then
         tempoAtual=love.timer.getTime()
-
 
         if tempoAtual-inimigos.ultimoTempoVida>=2 then
             x = janela.largura-40

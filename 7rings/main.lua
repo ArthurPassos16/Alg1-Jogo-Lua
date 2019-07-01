@@ -1,5 +1,5 @@
 require 'codigo/diretorio/jogo'
- anim = require 'anim8'
+anim8 = require 'codigo/bibliotecas/anim8'
 
 function love.load()
 	math.randomseed(os.time())
@@ -8,12 +8,12 @@ function love.load()
 	fontes.grande = love.graphics.newFont('arquivos/fontes/Gamer.ttf', 128)
 	fontes.pequena = love.graphics.newFont('arquivos/fontes/Gamer.ttf', 64)
 
-	animacaoes={}
+	animacoes={}
 	animacoes.heroina={}
-	animacoes.heroina.cima=animacao('cima')
+	--[[animacoes.heroina.cima=animacao('cima')
 	animacoes.heroina.baixo=animacao('baixo')
 	animacoes.heroina.direita=animacao('direita')
-	animacoes.heroina.esquerda=animacao('esquerda')
+	animacoes.heroina.esquerda=animacao('esquerda')--]]
 
 	--animacoes.zumbi={}
 

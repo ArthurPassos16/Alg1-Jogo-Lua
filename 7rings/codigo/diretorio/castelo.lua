@@ -2,17 +2,13 @@ function castelo_load()
 	castelo={
 		x=10, 
 		y=10, 
-		altura=love.graphics.getHeight()-25,
+		altura=love.graphics.getHeight()-20,
 		largura=280,
 		meio=190,
 		larguraBloco=15, 
 		alturaBloco=15
 	}
 	return castelo
-end
-
-function castelo_update(dt)
-	
 end
 
 function castelo_draw()

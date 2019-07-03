@@ -25,7 +25,7 @@ function inimigos_update(dt)
     end
 
     for i, inimigo in pairs(inimigos) do
-		inimigo.x = inimigo.x + velocidade * dt
+		inimigo.x = inimigo.x - velocidade * dt
 	end
 	return inimigos
 end
@@ -35,4 +35,9 @@ function inimigos_draw()
 		love.graphics.setColor(0,255,0)
  		love.graphics.rectangle('fill', inimigo.x, inimigo.y , inimigo.largura, inimigo.altura) 
 	end
+end
+
+function inimigos_remove(posicao)
+	table.remove(inimigos,posicao)
+	return inimigos
 end

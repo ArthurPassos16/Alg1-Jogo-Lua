@@ -1,5 +1,4 @@
 require 'codigo/diretorio/jogo'
-anim8 = require 'codigo/bibliotecas/anim8'
 
 function love.load()
 	math.randomseed(os.time())

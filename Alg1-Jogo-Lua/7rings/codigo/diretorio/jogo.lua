@@ -8,7 +8,7 @@ function jogo_load()
 	heroina=heroina_load()
 	castelo=castelo_load()
 	inimigos=inimigos_load()
-	bala=bala_load()
+	balas=bala_load()
 
 	morte=false
 end
@@ -17,20 +17,42 @@ function jogo_update(dt)
  	if not morte then
 		inimigos=inimigos_update(dt)
 		heroina=heroina_update(dt)
-		bala=bala_update(dt,heroina)
+		balas=bala_update(dt,heroina)
 		
 		-- detecta a colisao da heorina e dos inimigos com o castelo
 		for i=castelo.y, castelo.altura, castelo.alturaBloco do
 			for j=castelo.x, castelo.largura, castelo.larguraBloco do
-				if ((i==castelo.y or j==castelo.x or i==castelo.altura-5) and j<=castelo.meio) or ((i==175 or i==310) and j>castelo.meio) or 
-				 (j==castelo.meio and (i<=175 or i>=310)) or (j==castelo.largura and (i==190 or i==295)) then
-		 			heroina=detectarColisaoFora(heroina,j,i,castelo.alturaBloco,castelo.larguraBloco)
-				 	for k=1, #inimigos do
-		 				inimigo=detectarColisaoFora(inimigos[k],j,i,castelo.alturaBloco,castelo.larguraBloco)
-		 			end
-	 			end
-	 		end
-	 	end
+				if ((i==castelo.y or j==castelo.x or i==castelo.altura-5) and 
+					j<=castelo.meio) or ((i==175 or i==310) and j>castelo.meio) or 
+					(j==castelo.meio and (i<=175 or i>=310)) or (j==castelo.largura and (i==190 or i==295)) then
+				 	heroina=detectarColisaoFora(heroina,j,i,castelo.alturaBloco,castelo.larguraBloco)
+				 	for k,inimigo in pairs(inimigos) do
+						inimigo=detectarColisaoFora(inimigo,j,i,castelo.alturaBloco,castelo.larguraBloco)
+					end
+					for k,bala in pairs(balas) do
+						bloco={
+							x=j,
+							y=i,
+							altura=castelo.alturaBloco,
+							largura=castelo.larguraBloco
+						}
+						if detectarColisao(bala,bloco) then
+							balas_remove(k)
+						end
+					end
+				end
+			end
+		end
+
+	 	-- mata os inimigos
+	 	for i,bala in pairs(balas) do
+	 		for j,inimigo in pairs(inimigos) do
+				if detectarColisao(bala,inimigo) then
+					balas_remove(i)
+					inimigos_remove(j)
+				end
+			end	 	
+		end	
 
 		-- detecta colisão com o inimigo
 		for i=1, #inimigos do

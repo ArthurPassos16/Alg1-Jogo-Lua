@@ -23,6 +23,8 @@ function bala_update(dt,heroina)
 			novaBala={
 				x=posX,
 				y=posY,
+				largura=imagens.bala:getWidth(),
+				altura=imagens.bala:getHeight(),
 				angulo=angulo
 			}
 			table.insert(balas,novaBala)
@@ -39,7 +41,7 @@ function bala_update(dt,heroina)
 		
 		-- remove a bala assim que ela sai da janela
 		if bala.x > love.graphics.getWidth() or bala.y > love.graphics.getHeight() or bala.x < 0 or bala.y < 0 then
-			table.remove(balas,i)
+			balas_remove(i)
 		end
 	end
 	return balas
@@ -48,6 +50,11 @@ end
 
 function bala_draw()
 	for i,bala in pairs(balas) do
-		love.graphics.draw(imagens.bala,bala.x,bala.y,0,1,1,imagens.bala:getWidth(),imagens.bala:getHeight())
+		love.graphics.draw(imagens.bala,bala.x,bala.y,0,1,1,bala.largura,bala.altura)
 	end
+end
+
+function balas_remove(posicao)
+	table.remove(balas,posicao)
+	return balas
 end

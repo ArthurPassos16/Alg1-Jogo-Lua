@@ -1,4 +1,4 @@
-local anim = require 'codigo/bibliotecas/anal'
+
 
 function heroina_load()
 	heroina={

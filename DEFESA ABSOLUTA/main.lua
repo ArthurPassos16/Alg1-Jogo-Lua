@@ -53,7 +53,7 @@ end
 
 function love.update(dt)
 	tempoAtual=love.timer.getTime()
-	if love.keyboard.isDown("escape") and tela=='inicio' then
+	if love.keyboard.isDown("escape") then
 		os.exit()
 	elseif love.keyboard.isDown("right") and tela=='inicio' and tempoAtual-tempoClique>1 then
 		tempoClique=love.timer.getTime()
@@ -75,8 +75,8 @@ end
 function love.draw()
 	love.graphics.setColor(255,255,255)
 	love.graphics.draw(imagens.fundo,710,415,0,0.889,0.83,janela.largura+20,janela.altura+20)
+	love.graphics.setColor(0,0,0)
 	if tela=='inicio' then
-		love.graphics.setColor(0,0,0)
 	    love.graphics.setFont(fontes.grande)
 	    love.graphics.printf('DEFESA ABSOLUTA', janela.largura / 2 - 500, 100, 1000, 'center')
 	    love.graphics.setFont(fontes.media)
@@ -87,7 +87,6 @@ function love.draw()
 	    love.graphics.printf('<- instruções', 10, janela.altura-30, 1000, 'left')
 
 	elseif tela=='instrucoes' then
-		love.graphics.setColor(0,0,0)
 	    love.graphics.setFont(fontes.grande)
 	    love.graphics.printf('INSTRUÇÕES', 30, 10, 1000, 'left')
 	    love.graphics.setFont(fontes.media)
@@ -100,7 +99,6 @@ function love.draw()
 	    love.graphics.printf('voltar ->', janela.largura-150, janela.altura-30, 1000, 'left')
 
 	elseif tela=='historia' then
-		love.graphics.setColor(0,0,0)
 	    love.graphics.setFont(fontes.grande)
 	    love.graphics.printf('História', -100, 10, 1000, 'center')
 	    love.graphics.setFont(fontes.media)
@@ -116,8 +114,7 @@ function love.draw()
 
 	elseif tela=='jogo' then
 		love.graphics.clear()
-		love.graphics.setBackgroundColor(255,255,255)
-		love.graphics.setColor(0,255,0)
+		love.graphics.setColor(0,0,0)
 		love.graphics.rectangle('fill',janela.x,janela.y,janela.largura,janela.altura)
 		jogo_draw()
 	end

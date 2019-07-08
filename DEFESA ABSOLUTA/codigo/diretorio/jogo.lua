@@ -115,7 +115,6 @@ function fimDoJogo_draw()
 
     if math.cos(2 * math.pi * love.timer.getTime()) > 0 then
 		love.graphics.setFont(fontes.media)
-    	love.graphics.setColor(0, 0, 0)
         love.graphics.printf('PRESSIONE ESPAÇO PARA REINICIAR', janela.largura/2-500, janela.altura/2+100, 1000, 'center')
     end
 end

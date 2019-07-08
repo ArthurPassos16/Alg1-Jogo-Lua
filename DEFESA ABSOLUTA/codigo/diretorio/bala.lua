@@ -1,5 +1,5 @@
 function bala_load()
-	velocidade = 120
+	velocidade = 12
 	tempoRecarga = 2
 	tempoUltBala = love.timer.getTime()
 	balas={}									
@@ -33,8 +33,8 @@ function bala_update(dt,objeto)
 	for i, bala in pairs(balas) do
 		local Dx = velocidade * math.cos(bala.angulo)		
 		local Dy = velocidade * math.sin(bala.angulo)
-		bala.x = bala.x + Dx * dt
-		bala.y = bala.y + Dy * dt
+		bala.x = bala.x + Dx * dt * 4
+		bala.y = bala.y + Dy * dt * 4
 		
 		-- remove a bala assim que ela sai da janela
 		if bala.x > love.graphics.getWidth() or bala.y > love.graphics.getHeight() or bala.x < 0 or bala.y < 0 then
@@ -44,7 +44,7 @@ function bala_update(dt,objeto)
 end
 
 function bala_draw()
-	love.graphics.setColor(255,0,0)
+	love.graphics.setColor(255,255,255)
 	for i,bala in pairs(balas) do
 		love.graphics.draw(imagens.bala,bala.x,bala.y,0,1,1,bala.largura,bala.altura)
 	end

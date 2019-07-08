@@ -49,7 +49,7 @@ function balaCanhao_update(dt,canhao,inimigo)
 end
 
 function balaCanhao_draw()
-	love.graphics.setColor(255,0,0)
+	love.graphics.setColor(255,255,255)
 	for i,balaCanhao in pairs(balasCanhao) do
 		love.graphics.draw(imagens.bala,balaCanhao.x,balaCanhao.y,0,1,1,balaCanhao.largura,balaCanhao.altura)
 	end

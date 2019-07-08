@@ -1,15 +1,15 @@
 function balaCanhao_load() 
-	velocidade = 120
+	velocidade = 1
 	tempoUltBalaCanhao = love.timer.getTime()
 	balasCanhao={}							
 end
 
-function canhaoLado(dt,canhao,inimigo)
+function canhaoLado(canhao,inimigo)
 	tempoAtual=love.timer.getTime()
 
-	if tempoAtual-tempoUltBalaCanhao>1 then			
-		local posX = canhao.x + canhao.largura/2
-		local posY = canhao.y + canhao.altura/2
+	if tempoAtual-tempoUltBalaCanhao>1 then
+		local posX = canhao.x
+		local posY = canhao.y
 		local posX2 = inimigo.x + inimigo.largura/2
 		local posY2 = inimigo.y + inimigo.altura/2
 
@@ -25,15 +25,14 @@ function canhaoLado(dt,canhao,inimigo)
 		}
 		table.insert(balasCanhao,novaBalaCanhao)
 		love.audio.play(sons.canhao)
+		sons.canhao:setVolume(0.6)
 		tempoUltBalaCanhao=tempoAtual
 	end
 end
 
 function balaCanhao_update(dt,canhao,inimigo)
-	if canhao.y==400 and areaCanhaoDireito(inimigo)  then
-		canhaoLado(dt,canhao,inimigo)
-	elseif canhao.y==100 and areaCanhaoEsquerdo(inimigo) then
-		canhaoLado(dt,canhao,inimigo)
+	if (canhao.y==400 or canhao.y==100 or canhao.y==250) and  detectarColisao(canhao.area,inimigo)  then
+		canhaoLado(canhao,inimigo)
 	end
 	-- posição da bala dentro do vetor de balas 
 	for i, balaCanhao in pairs(balasCanhao) do

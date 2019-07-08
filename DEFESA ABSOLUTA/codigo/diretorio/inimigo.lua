@@ -18,6 +18,7 @@ function inimigos_update(dt)
 				raio=45,
 				direcao='esquerda',
 				ultimoTempo=0,
+				angulo=0,
 				quantVida=2
 			}
 			table.insert(inimigos,novoInimigo)
@@ -26,9 +27,26 @@ function inimigos_update(dt)
         inimigosMandados=inimigosMandados+1
     end
 
-    for i, inimigo in pairs(inimigos) do
-		inimigo.x = inimigo.x - velocidade * dt
-		animacoes.zumbi:update(dt)
+	local posX2 = heroina.x + heroina.largura/2
+	local posY2 = heroina.y + heroina.altura/2
+
+	for i, inimigo in pairs(inimigos) do
+		if heroinaForaCastelo() then
+			local posX = inimigo.x + inimigo.largura/2
+			local posY = inimigo.y + inimigo.altura/2
+
+			inimigo.angulo = math.atan2((posY2  - posY), ( posX2 - posX))
+
+			local Dx = velocidade * math.cos(inimigo.angulo)		
+			local Dy = velocidade * math.sin(inimigo.angulo)
+
+			inimigo.x = inimigo.x + Dx * dt - 10 * dt
+			inimigo.y = inimigo.y + Dy * dt - 10 * dt
+		else
+			inimigo.angulo=0
+			inimigo.x = inimigo.x - velocidade * dt
+			animacoes.zumbi:update(dt)
+		end
 	end
 end
 
@@ -36,8 +54,7 @@ function inimigos_draw()
 	for i,inimigo in pairs(inimigos) do
 		love.graphics.setColor(255,255,255)
 		anim=animacoes.zumbi
- 		anim:draw(inimigo.x+55,inimigo.y+60,0,1.40,1.45,inimigo.largura,inimigo.altura)
- 		--love.graphics.rectangle('fill', inimigo.x, inimigo.y , inimigo.largura, inimigo.altura) 	
+ 		anim:draw(inimigo.x+55,inimigo.y+60,0,1.40,1.45,inimigo.largura,inimigo.altura)	
 	end
 end
 

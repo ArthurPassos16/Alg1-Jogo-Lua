@@ -1,5 +1,5 @@
 function bala_load()
-	velocidade = 1
+	velocidade = 120
 	tempoRecarga = 2
 	tempoUltBala = love.timer.getTime()
 	balas={}									
@@ -38,7 +38,7 @@ function bala_update(dt,objeto)
 		
 		-- remove a bala assim que ela sai da janela
 		if bala.x > love.graphics.getWidth() or bala.y > love.graphics.getHeight() or bala.x < 0 or bala.y < 0 then
-			balas_remove(i)
+			bala_remove(i)
 		end
 	end
 end
@@ -55,7 +55,7 @@ function balaAtingeInimigo()
 		for j,inimigo in pairs(inimigos) do
 			if detectarColisao(bala,inimigo) then
 				inimigo.quantVida=inimigo.quantVida-1
-				balas_remove(i)
+				bala_remove(i)
 			end
 			if inimigo.quantVida==0 then
 				inimigos_remove(j)
@@ -64,6 +64,6 @@ function balaAtingeInimigo()
 	end
 end
 
-function balas_remove(posicao)
+function bala_remove(posicao)
 	table.remove(balas,posicao)
 end

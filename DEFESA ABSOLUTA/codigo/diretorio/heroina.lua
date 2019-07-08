@@ -20,29 +20,29 @@ function heroina_update(dt)
 		heroina.direcao='cima'
 		animacoes.heroina.cima:update(dt)
 	end
-	-- detecta a colisao da heorina e dos balas com o castelo
- 	castelo_update()
+	-- detecta a colisao da heroina e dos balas com o castelo
+ 	colisaoCasteloHeroina()
 	if love.keyboard.isDown("down","s") then
 		heroina.y=heroina.y+velocidade*dt
 		heroina.direcao='baixo'
 		animacoes.heroina.baixo:update(dt)
 	end
-	-- detecta a colisao da heorina e dos balas com o castelo
- 	castelo_update()
+	-- detecta a colisao da heroina e dos balas com o castelo
+ 	colisaoCasteloHeroina()
 	if love.keyboard.isDown("right","d") then
 		heroina.x=heroina.x+velocidade*dt
 		heroina.direcao='direita'
 		animacoes.heroina.direita:update(dt)
 	end
-	-- detecta a colisao da heorina e dos balas com o castelo
- 	castelo_update()
+	-- detecta a colisao da heroina e dos balas com o castelo
+ 	colisaoCasteloHeroina()
 	if love.keyboard.isDown("left","a") then
 		heroina.x=heroina.x-velocidade*dt
 		heroina.direcao='esquerda'
 		animacoes.heroina.esquerda:update(dt)
 	end
-	-- detecta a colisao da heorina e dos balas com o castelo
- 	castelo_update()
+	-- detecta a colisao da heroina e dos balas com o castelo
+ 	colisaoCasteloHeroina()
 
 	heroina.x = clamp(heroina.x,20,janela.largura-30)
 	heroina.y = clamp(heroina.y,20,janela.altura-35)
@@ -63,5 +63,9 @@ function heroina_draw()
 		animacao=animacoes.heroina.direita
 	end
  	animacao:draw(heroina.x+40, heroina.y+40, 0, 1, 1, heroina.largura, heroina.altura) 
- 	love.graphics.draw(imagens.arma, heroina.x+heroina.largura, heroina.y+40,0,0.203,0.349, imagens.arma:getWidth(), imagens.arma:getHeight()) 
+ 	--love.graphics.draw(imagens.arma, heroina.x+heroina.largura, heroina.y+40,0,0.203,0.349, imagens.arma:getWidth(), imagens.arma:getHeight()) 
+end
+
+function heroinaForaCastelo()
+	return (heroina.x+25>castelo.meio and (heroina.y<175 or heroina.y>310)) or (heroina.x+25>castelo.largura and (heroina.y>=175 or heroina.y<=310))
 end

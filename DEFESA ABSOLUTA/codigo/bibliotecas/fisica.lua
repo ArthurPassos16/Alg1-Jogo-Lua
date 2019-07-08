@@ -17,10 +17,19 @@ function detectarColisaoFora(personagem,x2,y2,alt2,larg2)
 	return colidiu
 end
 
-function detectarColisao(heroina,obstaculo)
-	return heroina.x<obstaculo.x+obstaculo.largura and obstaculo.x<heroina.x+heroina.largura and heroina.y<obstaculo.y+obstaculo.altura and obstaculo.y<heroina.y+heroina.altura
+function detectarColisao(objeto,obstaculo)
+	return objeto.x<obstaculo.x+obstaculo.largura and obstaculo.x<objeto.x+objeto.largura and objeto.y<obstaculo.y+obstaculo.altura and obstaculo.y<objeto.y+objeto.altura
 end
 
 function clamp(x, min, max)
     return math.min(math.max(x, min), max)
+end
+
+function tempoVivo(temp,ultTemp)
+	tempoAtual=love.timer.getTime()
+	if tempoAtual-ultTemp>=1 then
+		ultTemp=tempoAtual
+		return temp+1,ultTemp
+    end
+    return temp,ultTemp
 end
